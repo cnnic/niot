@@ -86,7 +86,7 @@ public class IoTIDRecognitionAction extends ActionSupport {
 	public String execute() throws Exception {
 		long begin = System.currentTimeMillis();
 		// added by dgq, for test only
-		int nflag = 1;
+		int nflag = 0;
 		if (0 == nflag) {
 			IDstrRecognition.readDao(0);
 			// System.setOut(new PrintStream(new

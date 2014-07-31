@@ -1366,7 +1366,7 @@ public class RuleFunction {
 				return OK;
 			} else {
 				return ERR;
-			}
+			}		 
 		} catch (Exception e) {
 			return ERR;
 		}

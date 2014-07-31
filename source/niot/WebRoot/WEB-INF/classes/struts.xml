@@ -2,28 +2,28 @@
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
 
-        <package name="cnnicActions" namespace="/cnnic"
-                extends="struts-default">
-                <action name="reco" class="cn.niot.controller.RecoAction">
-                        <result name="sucess">/result.jsp</result>
-                </action>
-        </package>
-        
-        <package name="ajax" extends="json-default">
-            <action name="respCode" class="cn.niot.controller.IoTIDRecognitionAction" method="execute">
-               <result type="json"></result>
-            </action>
-            
-                   <action name="respRul" class="cn.niot.controller.IoTNewRuleRecognitionAction" method="execute">
-               <result type="json"></result>
-            </action>
-            
-                        <action name="RFIDInput" class="cn.niot.controller.RFIDOrScanerInputAction" method="execute">
-               <result type="json"></result>
-            </action>
-            
-    </package>        
-        
-        </struts>  
+	<package name="cnnicActions" namespace="/cnnic" extends="struts-default">
+		<action name="reco" class="cn.niot.controller.RecoAction">
+			<result name="sucess">/result.jsp</result>
+		</action>
+	</package>
+
+	<package name="ajax" extends="json-default">
+		<action name="respCode" class="cn.niot.controller.IoTIDRecognitionAction"
+			method="execute">
+			<result type="json"></result>
+		</action>
+
+		<action name="respRul" class="cn.niot.controller.IoTNewRuleRecognitionAction"
+			method="execute">
+			<result type="json"></result>
+		</action>
+
+		<action name="RFIDInput" class="cn.niot.controller.RFIDOrScanerInputAction"
+			method="execute">
+			<result type="json"></result>
+		</action>
+	</package>
+</struts>  
 	
 	  
