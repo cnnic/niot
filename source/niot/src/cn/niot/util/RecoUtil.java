@@ -13,7 +13,7 @@ import com.opensymphony.xwork2.ActionContext;
 
 public class RecoUtil {
 	public static final String JNDI_NAME = "java:comp/env/jdbc/IoTDataSource";
-	public static final String SELECT_IOTID = "select * from iotid where id=?";
+	public static final String SELECT_IOTID = "select * from iotid where code=?";
 	public static final String COLUMNNAME = "columnName";
 	public static final String ID_LEN = "Len";
 	public static final String ID_NAME = "IDName";
@@ -27,19 +27,19 @@ public class RecoUtil {
 	public static final int ONE_ID_MATCHED = 1;
 
 	// 编码详细信息
-	public static final String SELECT_IDDETAIL = "select * from iotid join iotdetail on iotdetail.did=iotid.id and iotid.id=?;";
+	public static final String SELECT_IDDETAIL = "select * from iotid join iotdetail on iotdetail.id=iotid.id and iotid.id=?";
 
 	// 前端页面显示标准名称短码字符的最大长度
 	public static final int DISPLAYLENGTH = 9;
 
 	// administrative division
-	public static final String SELECT_ADMINDIVISION = "select * from admindivision where id=?";
+	public static final String SELECT_ADMINDIVISION = "select * from admindivision where code=?";
 
 	// country and region code
 	public static final String SELECT_COUNTRYREGIONCODE = "select * from countryregioncode where twocharcode=? or threecharcode=? or numcode=?";
 
 	// 烟草机械产品用物料
-	public static final String SELECT_TABACCOMACHINEPRODUCT = "select * from tabaccomachineproduct where categorycode=? and groupcode=? and variatycode=?";
+	public static final String SELECT_TABACCOMACHINEPRODUCT = "select * from tabaccomachineproduct where code=?";
 
 	// 商品条码零售商品编码EAN UPC前3位前缀码
 	public static final String SELECT_EANUPC = "select * from EANUPC where begincode<=? and endcode>=?";
@@ -48,31 +48,31 @@ public class RecoUtil {
 	public static final String SELECT_tabaccoC = "select * from tabaccoC where code=?";
 
 	// 烟草机械物料 分类和编码第2部分：专用件 附录D中的单位编码(672)
-	public static final String SELECT_TABACCOMACHINEPRODUCER = "select * from tabaccomachineproducer where id=? limit 1";
+	public static final String SELECT_TABACCOMACHINEPRODUCER = "select * from tabaccomachineproducer where code=? limit 1";
 
 	// CID调用4位数字行政区号
-	public static final String SELECT_DISTRICTNO = "select * from districtno where id=?";
+	public static final String SELECT_DISTRICTNO = "select * from districtno where code=?";
 
 	// 烟草机械产品用物料 企业机械标准件 编码中的类别代码，组别代码和品种代码(6)
-	public static final String SELECT_TABACCOSTANDARDPART = "select * from tabaccostandardpart where categorycode=? and groupcode=? and variatycode=?";
+	public static final String SELECT_TABACCOSTANDARDPART = "select * from tabaccostandardpart where code=?";
 
 	// 烟草机械产品用物料分类和编码 第6部分：原、辅材料(4)
-	public static final String SELECT_TABACCOMATERIAL = "select * from tabaccomaterial where categorycode=? and variatycode=?";
+	public static final String SELECT_TABACCOMATERIAL = "select * from tabaccomaterial where code=?";
 
 	// 粮食信息分类与编码 财务会计分类与代码(15)
-	public static final String SELECT_FOORDACCOUNT = "select * from foodaccount where id=?";
+	public static final String SELECT_FOORDACCOUNT = "select * from foodaccount where code=?";
 
 	// 粮食信息分类与代码 粮食设备分类与代码(23)
-	public static final String SELECT_GRAINEQUIPMENT = "select * from grainequipment where id=?";
+	public static final String SELECT_GRAINEQUIPMENT = "select * from grainequipment where code=?";
 
 	// 粮食信息分类与编码 粮食设施分类与编码(24)
-	public static final String SELECT_GRAINESTABLISHMENT = "select * from grainestablishment where id=?";
+	public static final String SELECT_GRAINESTABLISHMENT = "select * from grainestablishment where code=?";
 
 	// 烟草机械产品用物料 分类和编码 第5部分：电器元器件 (5)
-	public static final String SELECT_TABACCOELECTRICCOMPONENT = "select * from tabaccoelectriccomponent where categorycode=? and groupcode=?";
+	public static final String SELECT_TABACCOELECTRICCOMPONENT = "select * from tabaccoelectriccomponent where code=?";
 
 	// 行政区划代码随机取一条记录
-	public static final String SELECT_RANDOMADMINDIVISION = "select * from admindivision where id>=convert(floor(((SELECT MAX(convert(Id,signed)) FROM admindivision)-(SELECT MIN(convert(Id,signed)) FROM admindivision)) * rand() + (SELECT MIN(convert(Id,signed)) FROM admindivision)),char(6)) limit 1";
+	public static final String SELECT_RANDOMADMINDIVISION = "select * from admindivision where code>=convert(floor(((SELECT MAX(convert(code,signed)) FROM admindivision)-(SELECT MIN(convert(code,signed)) FROM admindivision)) * rand() + (SELECT MIN(convert(code,signed)) FROM admindivision)),char(6)) limit 1";
 
 	// EANUPC代码随机一条记录
 	public static final String SELECT_RANDOMEANUPC = "select floor(rand()*(endcode-begincode)+begincode) as code from (select * from EANUPC where rowno >= (select floor(rand()*(max(rowno)-min(rowno))) + min(rowno) from EANUPC) limit 1) t";
@@ -80,157 +80,157 @@ public class RecoUtil {
 	public static final String SELECT_TYPEANDRULES = "select * from iotid";
 
 	// 烟用材料编码 第1部分：烟用材料分类代码与产品代码(10)
-	public static final String SELECT_TABACCOMATERIALS = "select * from tobaccomaterials where categorycode=? and groupcode=?";
+	public static final String SELECT_TABACCOMATERIALS = "select * from tobaccomaterials where code=?";
 
 	// 粮食信息分类与编码 粮食贸易业务统计分类与代码(14)
-	public static final String SELECT_FOODTRADE = "select * from foodtradestatistics where id=?";
+	public static final String SELECT_FOODTRADE = "select * from foodtradestatistics where code=?";
 
 	// 粮食信息分类与编码 粮食仓储业务统计分类与代码(16)
-	public static final String SELECT_GRAINSTOREHOUSE = "select * from grainstorehouse where id=?";
+	public static final String SELECT_GRAINSTOREHOUSE = "select * from grainstorehouse where code=?";
 
 	// 粮食信息分类与编码 储粮病虫害分类与代码(17)
-	public static final String SELECT_GRAINSDISEASES = "select * from grainsdiseases where id=?";
+	public static final String SELECT_GRAINSDISEASES = "select * from grainsdiseases where code=?";
 
 	// 粮食信息分类与编码 粮食加工(18)
-	public static final String SELECT_FOODECONOMY = "select * from grainstechnicaleconomy where id=?";
+	public static final String SELECT_FOODECONOMY = "select * from grainstechnicaleconomy where code=?";
 
 	// 粮食信息分类与编码 粮食加工第1部分：加工作业分类与代码(19)
-	public static final String SELECT_GRAINSPROCESS = "select * from grainsprocess where id=?";
+	public static final String SELECT_GRAINSPROCESS = "select * from grainsprocess where code=?";
 
 	// 粮食信息分类与编码 粮食仓储第3部分：器材分类与代码(20)
-	public static final String SELECT_GRAINSEQUIPMENT = "select * from grainsequipment where id=?";
+	public static final String SELECT_GRAINSEQUIPMENT = "select * from grainsequipment where code=?";
 
 	// 粮食信息分类与编码 粮食仓储第2部分：粮情检测分类与代码(21)
-	public static final String SELECT_GRAINCONDITIONDETECTION = "select * from grainconditiondetection where id=?";
+	public static final String SELECT_GRAINCONDITIONDETECTION = "select * from grainconditiondetection where code=?";
 
 	// 粮食信息分类与编码 粮食仓储第1部分：仓储作业分类与代码(22)
-	public static final String SELECT_GRAINSSMARTWMS = "select * from grainsSmartWMS where id like ?";
+	public static final String SELECT_GRAINSSMARTWMS = "select * from grainsSmartWMS where code =?";
 
 	// 粮食信息分类与编码 粮食检验第2部分：质量标准分类与代码(26)
-	public static final String SELECT_GRIANQUALITYSTANDARD = "select * from grainsqualitystandard where id=?";
+	public static final String SELECT_GRIANQUALITYSTANDARD = "select * from grainsqualitystandard where code=?";
 
 	// 计量器具命名与分类编码(32)
 	public static final String SELECT_MEASURINGINSTRUMENT = "select * from measuringinstrument where code=?";
 
 	// 粮食信息分类与编码 粮食检验 第1部分：指标分类与代码(27)
-	public static final String SELECT_GRAINSINDEX = "select * from grainsindex where id=?";
+	public static final String SELECT_GRAINSINDEX = "select * from grainsindex where code=?";
 
 	// 粮食信息分类与编码 粮食及加工产品分类与代码(28)
-	public static final String SELECT_GRAINSINFORMATION = "select * from grainsinformation where id=?";
+	public static final String SELECT_GRAINSINFORMATION = "select * from grainsinformation where code=?";
 
 	// 粮食信息分类与编码 粮食属性分类与代码(29)
-	public static final String SELECT_GRAINSATTRIBUTE = "select * from grainsattribute where id=?";
+	public static final String SELECT_GRAINSATTRIBUTE = "select * from grainsattribute where code=?";
 
 	// select the first 7 numbers of a phone number
-	public static final String SELECT_PHONENUMBER = "select * from phonenumber where MobileNumber=?";
+	public static final String SELECT_PHONENUMBER = "select * from phonenumber where code=?";
 
 	// select the first 2 characters of a normal vehicle NO
-	public static final String SELECT_NORMALVEHICLENO = "select * from vehiclenonormal where vehicleprefix=?";
+	public static final String SELECT_NORMALVEHICLENO = "select * from vehiclenonormal where code=?";
 
 	// select the first 2 characters of a army vehicle NO
-	public static final String SELECT_ARMYVEHICLENO = "select * from vehiclenoarmy where vehicleprefix=?";
+	public static final String SELECT_ARMYVEHICLENO = "select * from vehiclenoarmy where code=?";
 
 	// select the first 2 characters of a WJ vehicle NO
-	public static final String SELECT_WJVEHICLENO = "select * from vehiclenowj where vehicleprefix=?";
+	public static final String SELECT_WJVEHICLENO = "select * from vehiclenowj where code=?";
 
 	// 粮食信息分类与编码 粮食行政、事业机构及社会团体分类与代码(31)
-	public static final String SELECT_GRAINSADMINISTRATIVE = "select * from grainsadministrative where id=?";
+	public static final String SELECT_GRAINSADMINISTRATIVE = "select * from grainsadministrative where code=?";
 
 	// 建筑产品分类和代码(34)
-	public static final String SELECT_CONSTRUCTIONPRODUCTS = "select * from constructionproducts where id=?";
+	public static final String SELECT_CONSTRUCTIONPRODUCTS = "select * from constructionproducts where code=?";
 
 	// 导航电子地图数据分类与编码(45)
-	public static final String SELECT_ELECTRONICMAP = "select * from electronicmap where id=?";
+	public static final String SELECT_ELECTRONICMAP = "select * from electronicmap where code=?";
 
 	// 地理信息分类与编码规则(56)
-	public static final String SELECT_GEOGRAPHICINFORMATION = "select * from geographicinformation where id=?";
+	public static final String SELECT_GEOGRAPHICINFORMATION = "select * from geographicinformation where code=?";
 
 	// 纺织面料编码化纤部分(64)
-	public static final String SELECT_TETILEFABRICNAME = "select * from textilefabricnamecode where id=?";
+	public static final String SELECT_TETILEFABRICNAME = "select * from textilefabricnamecode where code=?";
 
 	// 纺织面料属性代码(64)X1X2
-	public static final String SELECT_PROPERTIESMAINMATERIAL = "select * from propertiesmainmaterial where id=?";
+	public static final String SELECT_PROPERTIESMAINMATERIAL = "select * from propertiesmainmaterial where code=?";
 
 	// 纺织面料属性代码(64)非织造布X1X2
-	public static final String SELECT_PROPERTIESMAIN = "select * from propertiesmain where id=?";
+	public static final String SELECT_PROPERTIESMAIN = "select * from propertiesmain where code=?";
 
 	// 纺织面料属性代码(64)纤维特征 X3X4
-	public static final String SELECT_PROPERTIERFIBERCHARACTERS = "select * from propertiesfibercharacteristics where id=?";
+	public static final String SELECT_PROPERTIERFIBERCHARACTERS = "select * from propertiesfibercharacteristics where code=?";
 
 	// 纺织面料属性代码(64)X7X8纤网固结方式
-	public static final String SELECT_PROPERTIESMIX = "select * from propertiesmixed where id=?";
+	public static final String SELECT_PROPERTIESMIX = "select * from propertiesmixed where code=?";
 
 	// 纺织面料属性代码(64)X9X10 01-19 99
-	public static final String SELECT_PROPERTIESFABRIC = "select * from propertiesfabric where id=?";
+	public static final String SELECT_PROPERTIESFABRIC = "select * from propertiesfabric where code=?";
 
 	// 纺织面料属性代码(64)X11X12
-	public static final String SELECT_PROPERTIESDYEING = "select * from propertiesdyeingandfinishing where id=?";
+	public static final String SELECT_PROPERTIESDYEING = "select * from propertiesdyeingandfinishing where code=?";
 
 	// 面向装备制造业产品全生命周期工艺知识第2部分(65)
-	public static final String SELECT_MANUFACTURINGPROCESS = "select * from generalmanufacturingprocess where id=?";
+	public static final String SELECT_MANUFACTURINGPROCESS = "select * from generalmanufacturingprocess where code=?";
 
 	// 全国主要产品分类与代码第2部分 不可运输产品(712)
-	public static final String SELECT_UNTRANSPORTABLEPRODUCT = "select * from untransportableproduct where id=?";
+	public static final String SELECT_UNTRANSPORTABLEPRODUCT = "select * from untransportableproduct where code=?";
 
 	// 全国主要产品分类与代码第2部分 不可运输产品后3位(712)
-	public static final String SELECT_LASTTHREEUNTRANSPORTABLEPRODUCT = "select * from untransportableproduct where length(id)=5 and id like ?";
+	public static final String SELECT_LASTTHREEUNTRANSPORTABLEPRODUCT = "select * from untransportableproduct where length(code)=5 and code like ?";
 
 	// 道路交通信息采集信息分类与编码(77)
-	public static final String SELECT_TRAFFICINFORMATIONCOLLECTION = "select * from trafficinformationcollection where firstcode=? and secondcode=?";
+	public static final String SELECT_TRAFFICINFORMATIONCOLLECTION = "select * from trafficinformationcollection where code=?";
 
 	// 烟草行业工商统计数据元第2部分 代码集(202)
-	public static final String SELECT_TABACCOORGANIZATION = "select * from tobaccoorganization where id=?";
+	public static final String SELECT_TABACCOORGANIZATION = "select * from tobaccoorganization where code=?";
 
 	// 烟叶代码第5部分烟叶颜色代码(204)
-	public static final String SELECT_TABACCOLEAFCOLOR = "select * from tobaccoleafcolor where id=?";
+	public static final String SELECT_TABACCOLEAFCOLOR = "select * from tobaccoleafcolor where code=?";
 
 	// 烟叶代码第2部分烟叶形态代码(207)
-	public static final String SELECT_TABACCOLEAFFORM = "select * from tobaccoleafform where id=?";
+	public static final String SELECT_TABACCOLEAFFORM = "select * from tobaccoleafform where code=?";
 
 	// 烟叶代码第1部分烟叶分类与代码(208)
-	public static final String SELECT_TABACCOLEAFCLASS = "select * from tobaccoleafclass where id=?";
+	public static final String SELECT_TABACCOLEAFCLASS = "select * from tobaccoleafclass where code=?";
 
 	// 儿童大便性状代码(213)
-	public static final String SELECT_CHILDRENEXCREMENT = "select * from childrenexcrement where id=?";
+	public static final String SELECT_CHILDRENEXCREMENT = "select * from childrenexcrement where code=?";
 
 	// 饮酒频率代码(214)
-	public static final String SELECT_DRINKINGFREQUENCY = "select * from drinkingfrequency where id=?";
+	public static final String SELECT_DRINKINGFREQUENCY = "select * from drinkingfrequency where code=?";
 
 	// 饮酒种类代码(214)
-	public static final String SELECT_DRINKINGCLASS = "select * from drinkingclass where id=?";
+	public static final String SELECT_DRINKINGCLASS = "select * from drinkingclass where code=?";
 
 	// 身体活动频率代码(214)
-	public static final String SELECT_PHYSICALACTIVITYFREQUENCY = "select * from physicalactivityfrequency where id=?";
+	public static final String SELECT_PHYSICALACTIVITYFREQUENCY = "select * from physicalactivityfrequency where code=?";
 
 	// 妊娠终止方式代码表(215)
-	public static final String SELECT_TERMINATIONOFPREGNENCY = "select * from terminationofpregnancy where id=?";
+	public static final String SELECT_TERMINATIONOFPREGNENCY = "select * from terminationofpregnancy where code=?";
 
 	// 分娩方式代码(215)
-	public static final String SELECT_MODEOFPRODUCTION = "select * from modeofproduction where id=?";
+	public static final String SELECT_MODEOFPRODUCTION = "select * from modeofproduction where code=?";
 
 	// 分娩地点类别代码(215)
-	public static final String SELECT_DILIVERYPLACE = "select * from deliveryplace where id=?";
+	public static final String SELECT_DILIVERYPLACE = "select * from deliveryplace where code=?";
 
 	// 卫生信息数据元值域代码第17部分：卫生管理(218)
-	public static final String SELECT_HEALTHSUPERVISIONOBJECT = "select * from healthsupervisionobject where id=?";
+	public static final String SELECT_HEALTHSUPERVISIONOBJECT = "select * from healthsupervisionobject where code=?";
 
 	// 交通工具代码(219)
-	public static final String SELECT_COMMUNICATIONCODE = "select * from communicationmediacode where id=?";
+	public static final String SELECT_COMMUNICATIONCODE = "select * from communicationmediacode where code=?";
 
 	// 卫生监督机构人员编制类别代码(220)
-	public static final String SELECT_HYGIENEAGENCYPERSONNEL = "select * from hygieneagencypersonnel where id=?";
+	public static final String SELECT_HYGIENEAGENCYPERSONNEL = "select * from hygieneagencypersonnel where code=?";
 
 	// 卫生监督机构职工类别代码(220)
-	public static final String SELECT_WORKERHEALTHSUPERVISION = "select * from workerhealthsupervision where id=?";
+	public static final String SELECT_WORKERHEALTHSUPERVISION = "select * from workerhealthsupervision where code=?";
 
 	// 殡葬设施分类的一条记录
-	public static final String SELECT_FUNERALSERVICE = "select * from funeralservice where id=?";
+	public static final String SELECT_FUNERALSERVICE = "select * from funeralservice where code=?";
 
 	// 殡葬设施用品的一条记录
-	public static final String SELECT_FUNERALFACILITIES = "select * from funeralfacilities where id=?";
+	public static final String SELECT_FUNERALFACILITIES = "select * from funeralfacilities where code=?";
 
 	// 殡葬设施用品的一条记录
-	public static final String SELECT_SUPPLIES = "select * from funeralsupplies where id=?";
+	public static final String SELECT_SUPPLIES = "select * from funeralsupplies where code=?";
 
 	// 268中央党政机关
 	public static final String SELECT_PORTTARIFF268 = "select * from TheCenteralPartyCommitte where code=?";
@@ -287,13 +287,13 @@ public class RecoUtil {
 	public static final String SELECT_OFFICIALPOSITION = "select *from officialposition where code=?";
 
 	// CoastalAdminAreaId
-	public static final String SELECT_COASTALADMINAREAID = "select * from CoastalAdminAreaId where id=?";
+	public static final String SELECT_COASTALADMINAREAID = "select * from CoastalAdminAreaId where code=?";
 
 	// infectiousDieases code
-	public static final String SELECT_INFECTIOUSDISEASES = "select * from Infectiousdiseases where id=?";
+	public static final String SELECT_INFECTIOUSDISEASES = "select * from Infectiousdiseases where code=?";
 
 	// WirtschaftsTypCode
-	public static final String SELECT_WIRTSCHAFTSTYPCODE = "select * from WirtschaftsTypCode where id=?";
+	public static final String SELECT_WIRTSCHAFTSTYPCODE = "select * from WirtschaftsTypCode where code=?";
 
 	// 农药剂型名称及代码(305)
 	public static final String SELECT_PESTICIDECODE = "select * from PesticideFormulationCode where code=?";
@@ -405,7 +405,7 @@ public class RecoUtil {
 	// 国际贸易合同代码(326)
 	public static final String SELECT_COUNTRYREGIONCODE1 = "select * from countryregioncode where twocharcode=?";
 
-	public static final String SELECT_FIRST2CHARSOFADMINDIVISION = "select * from admindivision where id=?";
+	public static final String SELECT_FIRST2CHARSOFADMINDIVISION = "select * from admindivision where code=?";
 
 	// 电力科技成果分类与代码(784)
 	public static final String SELECT_ELECTRICPOWER = "select * from electricpower where code=?";

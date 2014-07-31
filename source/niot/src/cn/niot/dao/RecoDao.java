@@ -3,15 +3,20 @@ package cn.niot.dao;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Hashtable;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import cn.niot.service.CreateIoTIDSample;
 import mypack.HibernateSessionFactory;
 import mypack.Iotid;
 
@@ -23,6 +28,15 @@ import cn.niot.util.JdbcUtils;
 import cn.niot.util.*;
 
 public class RecoDao {
+	
+	public static int flagHash = 0;
+	
+	//定义动态数据TableName用于存储从Mysql取出的表名
+	public static ArrayList<String> TableName = new ArrayList<String>();
+	// 将数据分别以code和id作为key存入哈希表中，只需要执行一次，以后就直接取数据
+	public static Hashtable htKeyCodeAsValue = new Hashtable<String,Hashtable>();
+	public static Hashtable htKeyIdAsValue = new Hashtable<String,Hashtable>();
+	
 	private static RecoDao recoDao = new RecoDao();
 
 	// public static Connection connection = null;
@@ -30,6 +44,114 @@ public class RecoDao {
 		return recoDao;
 	}
 
+	
+	// 提取函数，用于提取sql语句中的表名
+	public String extractFunction(String sql) {
+		Pattern regex = Pattern.compile("(?<=from\\s)\\w+");
+		Matcher m = regex.matcher(sql);
+		while(m.find()) {
+			return m.group();
+		}
+		
+		return null;
+		
+	}
+	
+	// 公共函数
+	public boolean publicFunction(String sql, String code) {
+		
+		Hashtable hashtable = new Hashtable<String,String>();
+		String tableName = extractFunction(sql);
+		boolean ret = false;
+		System.out.println(code);
+		System.out.println(tableName);
+		
+		try {
+			if(flagHash == 0) {
+				hashTable();
+				flagHash = 1;
+			}
+		
+			if(hashtable.get(code) != null)
+			{
+				System.out.println("not null");
+				ret = true;
+			}
+		} finally {
+			JdbcUtils.free(null, null, null);
+		}
+		
+		return ret;
+		
+	}
+
+	
+	// 将数据分别以code和id作为key存入哈希表中，只需要执行一次，以后就直接取数据
+	public void hashTable(){
+		
+		//注册JDBC驱动
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//连接Mysql数据库
+        Connection connection = null;
+		try {
+			connection = DriverManager.getConnection("jdbc:mysql://218.241.108.143:3306/idrecohash", "root", "niot");
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			DatabaseMetaData meta = null;;
+			ResultSet rs = meta .getTables(null, null,null,null);			
+			while(rs.next()) {
+				TableName.add(rs.getString("TABLE_NAME"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//results[i]用于存储SQL语句的运行结果
+		PreparedStatement stmt[] = new PreparedStatement[TableName.size()];
+		ResultSet results[] = new ResultSet[TableName.size()];
+		
+		try {
+			
+			for (int i = 0; i < TableName.size(); i++) {
+			
+			stmt[i] = connection.prepareStatement("select * from "+TableName.get(i));
+			results[i] = stmt[i].executeQuery();
+			}
+					
+		  //将数据库中表的信息存入相应的哈希表，code作为key，id作为value
+		    for(int i = 0; i < TableName.size(); i++) {
+		    	//System.out.println(TableName.get(i));
+		    	Hashtable htCodeID = new Hashtable();
+		    	Hashtable htIDCode = new Hashtable();
+		    	while (results[i].next()) {
+		    		//htKeyCode[i].put(results[i].getObject("code"), results[i].getObject("id"));
+		    		htCodeID.put(results[i].getObject("code"), results[i].getObject("id")); 
+		    		//htKeyId[i].put(results[i].getObject("id"), results[i].getObject("code"));
+		    		htIDCode.put(results[i].getObject("id"), results[i].getObject("code"));
+		    	}
+		    	htKeyCodeAsValue.put(TableName.get(i), htCodeID);
+		    	htKeyIdAsValue.put(TableName.get(i), htIDCode);
+		    }	    
+		} catch (SQLException e) {
+			System.out.println(e.toString());
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	
 	public String getIoTID(String id) {
 		Connection connection = JdbcUtils.getConnection();
 		PreparedStatement stmt = null;
@@ -73,7 +195,7 @@ public class RecoDao {
 			for (Iotid admin : list) {
 				ArrayList<String> rules = new ArrayList<String>();// ֵ е
 																	// ArrayList
-				String idType = admin.getId();// results.getString("id");
+				String idType = admin.getid();// results.getString("id");
 				String lengthRule = admin.getLength();// results.getString("length");
 				String byteRule = admin.getByte_();// results.getString("byte");
 				String functionRules = admin.getFunction();// results.getString("function");
@@ -190,6 +312,72 @@ public class RecoDao {
 		}
 		return hashMapTypeToRules;
 	}
+	
+	/* Function: read data relating to IoTIDs and their rules from table "iotidcode"
+	 * Input: 
+	 * @param type: a flag used to hint which database reading method is used.
+	 * Output:
+	 * @param HashMap<String, ArrayList<String>>: one data structure of HashMap with key of IoTID type and value of a group of rules
+	 *        relating to the key.
+	 * creator: Guangqing Deng
+	 * time: 2014年7月7日
+	 */
+	public String DBreadIoTIDTypesAndRules(HashMap<String, Integer> hashMapTypeSampleNumber, HashMap<String, String>hashMapTypeToLengthRule
+			, HashMap<String, ArrayList<String>>hashMapTypeToByteRule, HashMap<String, ArrayList<String>>hashMapTypeToFunctionRule) {		
+		Connection connection = JdbcUtils.getConnection();
+		PreparedStatement stmt = null;
+		ResultSet results = null;
+		try {
+			stmt = connection.prepareStatement(RecoUtil.SELECT_TYPEANDRULES);
+			results = stmt.executeQuery();
+
+			while (results.next()) {
+				ArrayList<String> ByteRules = new ArrayList<String>();// 字节规则列表
+				ArrayList<String> FunctionRules = new ArrayList<String>();// 函数规则列表
+				String idType = results.getString("id");
+				String lengthRule = results.getString("length");
+				String byteRule = results.getString("byte");
+				String functionRules = results.getString("function");
+				
+				int Number = results.getInt("number");
+				hashMapTypeSampleNumber.put(idType, Number);
+				
+				// process the length rule
+				if (lengthRule.length() > 0) {
+					lengthRule = "IoTIDLength)(?#PARA=" + lengthRule + "){]";
+					hashMapTypeToLengthRule.put(idType, lengthRule);
+				}
+				
+				// process the byte rule
+				if (byteRule.length() > 0) {
+					String[] byteStrArray = byteRule.split(";");
+					int ByteLength = byteStrArray.length;
+					for (int i = 0; i < ByteLength; i++) {
+						byteStrArray[i] = "IoTIDByte)(?#PARA=" + byteStrArray[i] + "){]";
+						ByteRules.add(byteStrArray[i]);							
+					}
+					hashMapTypeToByteRule.put(idType, ByteRules);
+				}				
+				
+				// at last, process the function rule
+				if (functionRules.length() > 0) {
+					String[] splitFunctionRules = functionRules.split("\\(\\?\\#ALGNAME=");
+					int FunctionLength = splitFunctionRules.length;
+					for (int i = 0; i < FunctionLength; i++) {
+						if (splitFunctionRules[i].length() != 0) {
+							FunctionRules.add(splitFunctionRules[i]);						
+						}
+					}
+					hashMapTypeToFunctionRule.put(idType, FunctionRules);
+				}				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JdbcUtils.free(null, null, connection);
+		}
+		return "OK";
+	}
 
 	private void hashMapTypeToRulesSwitchhashMapRuleToTypes(
 			HashMap<String, ArrayList<String>> hashMapRuleToTypes, String rule,
@@ -262,8 +450,7 @@ public class RecoDao {
 	}
 
 	// 烟草机械产品用物料 分类和编码 第3部分：机械外购件(7)
-	public boolean getTabaccoMachineProduct(String categoryCode,
-			String groupCode, String variatyCode) {
+	public boolean getTabaccoMachineProduct(String code) {
 		Connection connection = JdbcUtils.getConnection();
 		PreparedStatement stmt = null;
 		ResultSet results = null;
@@ -272,9 +459,7 @@ public class RecoDao {
 			stmt = connection
 					.prepareStatement(RecoUtil.SELECT_TABACCOMACHINEPRODUCT);
 			int i = 1;
-			stmt.setString(i++, categoryCode);
-			stmt.setString(i++, groupCode);
-			stmt.setString(i++, variatyCode);
+			stmt.setString(i++, code);
 
 			results = stmt.executeQuery();
 			int rowcount = 0;
@@ -291,6 +476,7 @@ public class RecoDao {
 		}
 		return ret;
 	}
+
 
 	// 商品条码零售商品编码EAN UPC前3位前缀码
 	public boolean getPrefixofRetailCommodityNumber(int code) {
@@ -375,9 +561,8 @@ public class RecoDao {
 		return ret;
 	}
 
-	// 烟草机械产品用物料 企业机械标准件 编码中的类别代码，组别代码和品种代码(6)
-	public boolean getTabaccoStandardPart(String categoryCode,
-			String groupCode, String variatyCode) {
+	/// 烟草机械产品用物料 企业机械标准件 编码中的类别代码，组别代码和品种代码(6)
+	public boolean getTabaccoStandardPart(String code) {
 		Connection connection = JdbcUtils.getConnection();
 		PreparedStatement stmt = null;
 		ResultSet results = null;
@@ -386,9 +571,7 @@ public class RecoDao {
 			stmt = connection
 					.prepareStatement(RecoUtil.SELECT_TABACCOSTANDARDPART);
 			int i = 1;
-			stmt.setString(i++, categoryCode);
-			stmt.setString(i++, groupCode);
-			stmt.setString(i++, variatyCode);
+			stmt.setString(i++, code);
 
 			results = stmt.executeQuery();
 			int rowcount = 0;
@@ -405,6 +588,7 @@ public class RecoDao {
 		}
 		return ret;
 	}
+
 
 	// 烟草机械产品用物料分类和编码 第6部分：原、辅材料(4)
 	public boolean getTabaccoMaterial(String categoryCode, String variatyCode) {
@@ -610,7 +794,7 @@ public class RecoDao {
 	}
 
 	// 烟用材料编码 第1部分：烟用材料分类代码与产品代码(10)
-	public boolean getTobbacoMaterials(String categoryCode, String groupCode) {
+	public boolean getTobbacoMaterials(String code) {
 		Connection connection = JdbcUtils.getConnection();
 		PreparedStatement stmt = null;
 		ResultSet results = null;
@@ -619,8 +803,7 @@ public class RecoDao {
 			stmt = connection
 					.prepareStatement(RecoUtil.SELECT_TABACCOMATERIALS);
 			int i = 1;
-			stmt.setString(i++, categoryCode);
-			stmt.setString(i++, groupCode);
+			stmt.setString(i++, code);
 
 			results = stmt.executeQuery();
 			int rowcount = 0;
@@ -637,6 +820,8 @@ public class RecoDao {
 		}
 		return ret;
 	}
+
+
 
 	// 粮食信息分类与编码 粮食贸易业务统计分类与代码(14)
 	public boolean getFoodTrade(String code) {
@@ -1383,8 +1568,7 @@ public class RecoDao {
 	}
 
 	// 道路交通信息采集信息分类与编码(77)
-	public boolean getTrafficInformationCollection(String firstCode,
-			String secondCode) {
+	public boolean getTrafficInformationCollection(String code) {
 		Connection connection = JdbcUtils.getConnection();
 		PreparedStatement stmt = null;
 		ResultSet results = null;
@@ -1393,8 +1577,7 @@ public class RecoDao {
 			stmt = connection
 					.prepareStatement(RecoUtil.SELECT_TRAFFICINFORMATIONCOLLECTION);
 			int i = 1;
-			stmt.setString(i++, firstCode);
-			stmt.setString(i++, secondCode);
+			stmt.setString(i++, code);
 
 			results = stmt.executeQuery();
 			int rowcount = 0;
@@ -1411,6 +1594,7 @@ public class RecoDao {
 		}
 		return ret;
 	}
+
 
 	// 烟草行业工商统计数据元第2部分 代码集(202)
 	public boolean getTrafficOrganization(String code) {

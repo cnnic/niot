@@ -529,16 +529,18 @@ public class IDstrRecognition {
 			Object testID = iterator1.next();
 			String test = testHashMap.get(testID);
 			int i = 0;
+			//System.out.println(testID + "  " + test);
 			
 			// just for test, added by dgq
-			if (test.equals("10100")) {
+			if (test.equals("6959999699990")) {
 				i = 0;
 			}			
 			
 			ArrayList<String> s = hashMapTypeToRules.get(testID);
 			String resFlag = "OK";
 			String res = "";
-			for (i = 0; i < s.size(); i++) {
+			int size = s.size();
+			for (i = 0; i < size; i++) {
 				String temp = s.get(i);
 				String[] splitRules = temp.split("\\)\\(\\?\\#PARA=");// 提取规则名
 				String[] splitParameter = splitRules[1].split("\\)\\{\\]");// 提取参数

@@ -158,8 +158,7 @@ public class NewIDstdCollisionDetect {
 			resChars[i] = key.toString().charAt(0);
 			i++; 
 		}
-		if (i > 0){
-			
+		if (i > 0){			
 			resChar = randomizeArray(resChars, i);
 		}	
         
@@ -178,8 +177,7 @@ public class NewIDstdCollisionDetect {
 		char tmp = '0';
 	    for(i = 0; i < len; i++)  
 	    {	    	
-	    	do {
-	    		
+	    	do {	    		
 	    		//double random = Math.random();
 	    		double random = r1.nextDouble();
 		        index = (int) Math.floor(random * (len - i)); 

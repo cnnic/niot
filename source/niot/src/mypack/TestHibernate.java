@@ -20,7 +20,7 @@ public class TestHibernate {
 			Query query = session.createQuery("from Iotid  ");
 			List<Iotid> list=query.list();
 			   for(Iotid admin:list){
-			    System.out.println(admin.getId());
+			    System.out.println(admin.getid());
 			   }
 			  }finally{
 			   if(session!=null)

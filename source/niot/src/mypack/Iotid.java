@@ -37,11 +37,11 @@ public class Iotid implements java.io.Serializable {
 
 	// Property accessors
 
-	public String getId() {
+	public String getid() {
 		return this.id;
 	}
 
-	public void setId(String id) {
+	public void setcode(String id) {
 		this.id = id;
 	}
 

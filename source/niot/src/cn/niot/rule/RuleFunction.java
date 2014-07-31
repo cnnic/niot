@@ -463,7 +463,7 @@ public class RuleFunction {
 				id = id.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			id = id.concat(append);
-			boolean ret = recoDao.getAdminDivisionID(id);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_ADMINDIVISION,id);
 			if (ret) {
 				return OK;
 			} else
@@ -495,7 +495,7 @@ public class RuleFunction {
 				id = id.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			id = id.concat(append);
-			boolean ret = recoDao.getAdminDivisionID(id);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_ADMINDIVISION,id);
 			if (ret) {
 				return OK;
 			} else
@@ -525,7 +525,7 @@ public class RuleFunction {
 			for (int i = 0; i < LenIndex; i++) {
 				id = id.concat(String.valueOf(IDstr[Index[i]]));
 			}
-			boolean ret = recoDao.getAdminDivisionID(id);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_ADMINDIVISION,id);
 			if (ret) {
 				return OK;
 			} else
@@ -616,15 +616,12 @@ public class RuleFunction {
 			if (LenIndex != 5) {
 				return ERR;
 			}
-			String categoryCode = String.valueOf(IDstr[Index[0]]);
-			String groupCode = String.valueOf(IDstr[Index[1]])
-					+ String.valueOf(IDstr[Index[2]]);
-			String variatyCode = String.valueOf(IDstr[Index[3]])
-					+ String.valueOf(IDstr[Index[4]]);
+			String code = String.valueOf(IDstr[Index[0]])+String.valueOf(IDstr[Index[1]])
+			+ String.valueOf(IDstr[Index[2]])+String.valueOf(IDstr[Index[3]])
+			+ String.valueOf(IDstr[Index[4]]);
 
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getTabaccoMachineProduct(categoryCode,
-					groupCode, variatyCode);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_TABACCOMACHINEPRODUCT,code);
 			if (ret) {
 				return OK;
 			} else
@@ -716,7 +713,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getDistrictNo(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_DISTRICTNO,code);
 			if (ret) {
 				return OK;
 			} else
@@ -774,15 +771,12 @@ public class RuleFunction {
 			if (LenIndex != 5) {
 				return ERR;
 			}
-			String categoryCode = String.valueOf(IDstr[Index[0]]);
-			String groupCode = String.valueOf(IDstr[Index[1]])
-					+ String.valueOf(IDstr[Index[2]]);
-			String variatyCode = String.valueOf(IDstr[Index[3]])
+			String code = String.valueOf(IDstr[Index[0]])+String.valueOf(IDstr[Index[1]])
+					+ String.valueOf(IDstr[Index[2]])+String.valueOf(IDstr[Index[3]])
 					+ String.valueOf(IDstr[Index[4]]);
 
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getTabaccoStandardPart(categoryCode,
-					groupCode, variatyCode);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_TABACCOSTANDARDPART,code);
 			if (ret) {
 				return OK;
 			} else
@@ -807,14 +801,13 @@ public class RuleFunction {
 			if (LenIndex != 5) {
 				return ERR;
 			}
-			String categoryCode = String.valueOf(IDstr[Index[0]])
-					+ String.valueOf(IDstr[Index[1]]);
-			String variatyCode = String.valueOf(IDstr[Index[2]])
+			String code = String.valueOf(IDstr[Index[0]])
+					+ String.valueOf(IDstr[Index[1]])+String.valueOf(IDstr[Index[2]])
 					+ String.valueOf(IDstr[Index[3]])
 					+ String.valueOf(IDstr[Index[4]]);
 
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getTabaccoMaterial(categoryCode, variatyCode);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_TABACCOMATERIAL,code);
 			if (ret) {
 				return OK;
 			} else
@@ -884,7 +877,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getFoodAccount(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_FOORDACCOUNT,code);
 			if (ret) {
 				return OK;
 			} else
@@ -914,7 +907,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getGrainEquipment(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_GRAINEQUIPMENT,code);
 			if (ret) {
 				return OK;
 			} else
@@ -944,7 +937,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getGrainEstablishment(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_GRAINESTABLISHMENT,code);
 			if (ret) {
 				return OK;
 			} else
@@ -969,14 +962,12 @@ public class RuleFunction {
 			if (LenIndex != 5) {
 				return ERR;
 			}
-			String categoryCode = String.valueOf(IDstr[Index[0]])
-					+ String.valueOf(IDstr[Index[1]]);
-			String groupCode = String.valueOf(IDstr[Index[2]])
+			String code = String.valueOf(IDstr[Index[0]])
+					+ String.valueOf(IDstr[Index[1]])+String.valueOf(IDstr[Index[2]])
 					+ String.valueOf(IDstr[Index[3]])
 					+ String.valueOf(IDstr[Index[4]]);
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getTabaccoElectricComponent(categoryCode,
-					groupCode);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_TABACCOELECTRICCOMPONENT,code);
 			if (ret) {
 				return OK;
 			} else
@@ -2433,12 +2424,11 @@ public class RuleFunction {
 			if (LenIndex != 4) {
 				return ERR;
 			}
-			String categoryCode = String.valueOf(IDstr[Index[0]])
-					+ String.valueOf(IDstr[Index[1]]);
-			String groupCode = String.valueOf(IDstr[Index[2]])
+			String code = String.valueOf(IDstr[Index[0]])
+					+ String.valueOf(IDstr[Index[1]])+String.valueOf(IDstr[Index[2]])
 					+ String.valueOf(IDstr[Index[3]]);
 			RecoDao dao = new RecoDao();
-			boolean ret = dao.getTobbacoMaterials(categoryCode, groupCode);
+			boolean ret = dao.publicFunction(RecoUtil.SELECT_TABACCOMATERIALS,code);
 			if (ret) {
 				return OK;
 			} else {
@@ -2707,21 +2697,21 @@ public class RuleFunction {
 				id = id.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			if (IDstr[Index[0]] == '1') {
-				boolean ret = recoDao.getFuneral(id,
-						RecoUtil.SELECT_FUNERALSERVICE);
+				boolean ret = recoDao.publicFunction(
+						RecoUtil.SELECT_FUNERALSERVICE,id);
 				if (ret) {
 					return OK;
 				} else
 					return ERR;
 			} else if (IDstr[Index[0]] == '2') {
-				boolean ret = recoDao.getFuneral(id,
-						RecoUtil.SELECT_FUNERALFACILITIES);
+				boolean ret = recoDao.publicFunction(
+						RecoUtil.SELECT_FUNERALFACILITIES,id);
 				if (ret) {
 					return OK;
 				} else
 					return ERR;
 			} else if (IDstr[Index[0]] == '3') {
-				boolean ret = recoDao.getFuneral(id, RecoUtil.SELECT_SUPPLIES);
+				boolean ret = recoDao.publicFunction(RecoUtil.SELECT_SUPPLIES,id);
 				if (ret) {
 					return OK;
 				} else
@@ -2893,7 +2883,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getFireInfomation395(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PORTTARIFF395,code);
 			if (ret) {
 				return OK;
 			} else
@@ -2999,7 +2989,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPrefixoftabaccoC(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_tabaccoC,code);
 			if (ret) {
 				return OK;
 			} else
@@ -3547,7 +3537,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPortTariff268(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PORTTARIFF268,code);
 			if (ret) {
 				return OK;
 			} else
@@ -3577,7 +3567,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPortTariff270(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PORTTARIFF270,code);
 			if (ret) {
 				return OK;
 			} else
@@ -3607,7 +3597,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPortTariff275(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PORTTARIFF275,code);
 			if (ret) {
 				return OK;
 			} else
@@ -3637,7 +3627,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPortTariff276(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PORTTARIFF276,code);
 			if (ret) {
 				return OK;
 			} else
@@ -3667,7 +3657,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPortTariffMa281(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PORTTARIFFMa281,code);
 			if (ret) {
 				return OK;
 			} else
@@ -8056,7 +8046,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getFoodTrade(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_FOODTRADE,code);
 			if (ret) {
 				return OK;
 			} else
@@ -8086,7 +8076,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getFoodEconomy(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_FOODECONOMY,code);
 			if (ret) {
 				return OK;
 			} else
@@ -8116,7 +8106,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getGrainStoreHouse(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_GRAINSTOREHOUSE,code);
 			if (ret) {
 				return OK;
 			} else
@@ -8146,7 +8136,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getGrainsDiseases(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_GRAINSDISEASES,code);
 			if (ret) {
 				return OK;
 			} else
@@ -8176,7 +8166,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getGrainsProcess(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_GRAINSPROCESS,code);
 			if (ret) {
 				return OK;
 			} else
@@ -8206,7 +8196,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getGrainsEquipment(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_GRAINSEQUIPMENT,code);
 			if (ret) {
 				return OK;
 			} else
@@ -8236,7 +8226,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getGrainConditionDetection(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_GRAINCONDITIONDETECTION,code);
 			if (ret) {
 				return OK;
 			} else
@@ -8266,7 +8256,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getgrainsSmartWMS(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_GRAINSSMARTWMS,code);
 			if (ret) {
 				return OK;
 			} else
@@ -8296,7 +8286,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getGrainsQualityStandard(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_GRIANQUALITYSTANDARD,code);
 			if (ret) {
 				return OK;
 			} else
@@ -8326,7 +8316,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getMeasuringInstrument(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_MEASURINGINSTRUMENT,code);
 			if (ret) {
 				return OK;
 			} else
@@ -8356,7 +8346,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getGrainsIndex(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_GRAINSINDEX,code);
 			if (ret) {
 				return OK;
 			} else
@@ -8386,7 +8376,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getGrainsInformation(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_GRAINSINFORMATION,code);
 			if (ret) {
 				return OK;
 			} else
@@ -8416,7 +8406,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getGrainsAttribute(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_GRAINSATTRIBUTE,code);
 			if (ret) {
 				return OK;
 			} else
@@ -8476,7 +8466,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getGrainsAdministrative(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_GRAINSADMINISTRATIVE,code);
 			if (ret) {
 				return OK;
 			} else
@@ -8506,7 +8496,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getConstructionProducts(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_CONSTRUCTIONPRODUCTS,code);
 			if (ret) {
 				return OK;
 			} else
@@ -8565,7 +8555,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getElectronicMap(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_ELECTRONICMAP,code);
 			if (ret) {
 				return OK;
 			} else
@@ -8668,7 +8658,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getGeographicInformation(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_GEOGRAPHICINFORMATION,code);
 			if (ret) {
 				return OK;
 			} else
@@ -8764,7 +8754,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getTextileFabricNameCode(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_TETILEFABRICNAME,code);
 			if (ret) {
 				return OK;
 			} else
@@ -8794,8 +8784,8 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPropertiesMainMaterial(code);
-			boolean retMain = recoDao.getPropertiesMain(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PROPERTIESMAINMATERIAL,code);
+			boolean retMain = recoDao.publicFunction(RecoUtil.SELECT_PROPERTIESMAIN,code);
 			if (ret || retMain) {
 				return OK;
 			} else
@@ -8825,7 +8815,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPropertiesFiberCharacteristics(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PROPERTIERFIBERCHARACTERS,code);
 			if (ret) {
 				return OK;
 			} else
@@ -8856,7 +8846,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPropertiesMix(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PROPERTIESMIX,code);
 			Pattern pa = Pattern.compile(regex);
 			Matcher ma = pa.matcher(code);
 			boolean retRegex = ma.matches();
@@ -8889,7 +8879,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPropertiesFabric(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PROPERTIESFABRIC,code);
 			if (ret) {
 				return OK;
 			} else
@@ -8919,7 +8909,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPropertiesDyeingandFinishing(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PROPERTIESDYEING,code);
 			if (ret) {
 				return OK;
 			} else
@@ -8949,7 +8939,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getGeneralManufacturingProcess(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_MANUFACTURINGPROCESS,code);
 			if (ret) {
 				return OK;
 			} else
@@ -9021,7 +9011,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getUntransportableProduct(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_UNTRANSPORTABLEPRODUCT,code);
 			if (ret) {
 				return OK;
 			} else
@@ -9075,13 +9065,11 @@ public class RuleFunction {
 		if (LenIndex != 4) {
 			return ERR;
 		}
-		String firstCode = String.valueOf(IDstr[Index[0]])
-				+ String.valueOf(IDstr[Index[1]]);
-		String secondCode = String.valueOf(IDstr[Index[2]])
+		String code = String.valueOf(IDstr[Index[0]])
+				+ String.valueOf(IDstr[Index[1]])+String.valueOf(IDstr[Index[2]])
 				+ String.valueOf(IDstr[Index[3]]);
 		RecoDao recoDao = new RecoDao();
-		boolean ret = recoDao.getTrafficInformationCollection(firstCode,
-				secondCode);
+		boolean ret = recoDao.publicFunction(RecoUtil.SELECT_TRAFFICINFORMATIONCOLLECTION,code);
 		if (ret) {
 			return OK;
 		} else
@@ -9108,7 +9096,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getTobaccoLeafColor(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_TABACCOLEAFCOLOR,code);
 			if (ret) {
 				return OK;
 			} else
@@ -9138,7 +9126,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getTrafficOrganization(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_TABACCOORGANIZATION,code);
 			if (ret) {
 				return OK;
 			} else
@@ -9168,7 +9156,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getTobaccoLeafForm(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_TABACCOLEAFFORM,code);
 			if (ret) {
 				return OK;
 			} else
@@ -9198,7 +9186,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getTobaccoLeafClass(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_TABACCOLEAFCLASS,code);
 			if (ret) {
 				return OK;
 			} else
@@ -9228,7 +9216,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getChildrenExcrement(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_CHILDRENEXCREMENT,code);
 			if (ret) {
 				return OK;
 			} else
@@ -9286,7 +9274,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getDrinkingFrequency(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_DRINKINGFREQUENCY,code);
 			if (ret) {
 				return OK;
 			} else
@@ -9316,7 +9304,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getDrinkingClass(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_DRINKINGCLASS,code);
 			if (ret) {
 				return OK;
 			} else
@@ -9346,7 +9334,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPhysicalActivityFrequency(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PHYSICALACTIVITYFREQUENCY,code);
 			if (ret) {
 				return OK;
 			} else
@@ -9376,7 +9364,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getTerminationofPregnancy(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_TERMINATIONOFPREGNENCY,code);
 			if (ret) {
 				return OK;
 			} else
@@ -9406,7 +9394,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getModeofProduction(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_MODEOFPRODUCTION,code);
 			if (ret) {
 				return OK;
 			} else
@@ -9436,7 +9424,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getDileveryPlace(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_DILIVERYPLACE,code);
 			if (ret) {
 				return OK;
 			} else
@@ -9466,7 +9454,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getHealthSupervisionObject(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_HEALTHSUPERVISIONOBJECT,code);
 			if (ret) {
 				return OK;
 			} else
@@ -9496,7 +9484,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getCommunicationCode(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_COMMUNICATIONCODE,code);
 			if (ret) {
 				return OK;
 			} else
@@ -9526,7 +9514,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getHygieneAgencyPersonnel(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_HYGIENEAGENCYPERSONNEL,code);
 			if (ret) {
 				return OK;
 			} else
@@ -9556,7 +9544,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getWorkerHealthSupervision(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_WORKERHEALTHSUPERVISION,code);
 			if (ret) {
 				return OK;
 			} else
@@ -9629,7 +9617,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPortTariff280(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PORTTARIFF281,code);
 			if (ret) {
 				return OK;
 			} else
@@ -9659,7 +9647,7 @@ public class RuleFunction {
 			}
 
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPortTariffMa282(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PORTTARIFFMa282,code);
 			if (ret) {
 				return OK;
 			} else
@@ -9729,7 +9717,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPortTariffMa284(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PORTTARIFFMa284,code);
 			if (ret) {
 				return OK;
 			} else
@@ -9760,7 +9748,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPortTariffMa285(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PORTTARIFFMa285,code);
 			if (ret) {
 				return OK;
 			} else
@@ -9790,7 +9778,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPortTariffMa287(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PORTTARIFFMa287,code);
 			if (ret) {
 				return OK;
 			} else
@@ -9820,7 +9808,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPortTariffMa288(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PORTTARIFFMa288,code);
 			if (ret) {
 				return OK;
 			} else
@@ -9850,7 +9838,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPortTariffMa291(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PORTTARIFFMa191,code);
 			if (ret) {
 				return OK;
 			} else
@@ -9911,7 +9899,7 @@ public class RuleFunction {
 			for (int i = 0; i < LenIndex; i++) {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
-			boolean ret = recoDao.getInternationalShipCode(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_INTERNATIONALSHIP,code);
 			if (ret) {
 				return OK;
 			} else {
@@ -9944,7 +9932,7 @@ public class RuleFunction {
 				id = id.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			id = id.concat(append);
-			boolean ret = recoDao.getCoastalAdminAreaID(id);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_COASTALADMINAREAID,id);
 			if (ret) {
 				return OK;
 			} else {
@@ -9975,7 +9963,7 @@ public class RuleFunction {
 			for (int i = 0; i < LenIndex; i++) {
 				id = id.concat(String.valueOf(IDstr[Index[i]]));
 			}
-			boolean ret = recoDao.getWirtschaftsTypCodeID(id);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_WIRTSCHAFTSTYPCODE,id);
 			if (ret) {
 				return OK;
 			} else {
@@ -10007,7 +9995,7 @@ public class RuleFunction {
 			for (int i = 0; i < LenIndex; i++) {
 				id = id.concat(String.valueOf(IDstr[Index[i]]));
 			}
-			boolean ret = recodao.getInfectiousDiseasesID(id);
+			boolean ret = recodao.publicFunction(RecoUtil.SELECT_INFECTIOUSDISEASES,id);
 			if (ret) {
 				return OK;
 			} else {
@@ -10068,7 +10056,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getGeographicalCode(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_GEOGRAPHICALCODE,code);
 			if (ret) {
 				return OK;
 			} else {
@@ -10100,7 +10088,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPesticideFormulationCode(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PESTICIDECODE,code);
 			if (ret) {
 				return OK;
 			} else {
@@ -10132,7 +10120,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPassengerCarCode(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PASSENGERCARCODE,code);
 			if (ret) {
 				return OK;
 			} else {
@@ -10161,7 +10149,7 @@ public class RuleFunction {
 			String code = String.valueOf(IDstr[Index[0]])
 					+ String.valueOf(IDstr[Index[1]]);
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getRoadTransportation21(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_ROADTRANSPORTATION21,code);
 			if (ret) {
 				return OK;
 			} else
@@ -10195,7 +10183,7 @@ public class RuleFunction {
 		}
 		try {
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getCivilAviation(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_CIVILAVIATION,code);
 			if (ret) {
 				return OK;
 			} else
@@ -10223,7 +10211,7 @@ public class RuleFunction {
 			String code = String.valueOf(IDstr[Index[0]])
 					+ String.valueOf(IDstr[Index[1]]);
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getRoadTransportation22(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_ROADTRANSPORTATION22,code);
 			if (ret) {
 				return OK;
 			} else
@@ -10252,7 +10240,7 @@ public class RuleFunction {
 			String code = String.valueOf(IDstr[Index[0]])
 					+ String.valueOf(IDstr[Index[1]]);
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getRoadTransportation32(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_ROADTRANSPORTATION32,code);
 			if (ret) {
 				return OK;
 			} else
@@ -10281,7 +10269,7 @@ public class RuleFunction {
 					+ String.valueOf(IDstr[Index[1]])
 					+ String.valueOf(IDstr[Index[2]]);
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getRoadTransportation5(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_ROADTRANSPORTATION5,code);
 			if (ret) {
 				return OK;
 			} else
@@ -10311,7 +10299,7 @@ public class RuleFunction {
 					+ String.valueOf(IDstr[Index[1]])
 					+ String.valueOf(IDstr[Index[2]]);
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getRoadTransportation41(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_ROADTRANSPORTATION41,code);
 			if (ret) {
 				return OK;
 			} else
@@ -10340,7 +10328,7 @@ public class RuleFunction {
 			String code = String.valueOf(IDstr[Index[0]])
 					+ String.valueOf(IDstr[Index[1]]);
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getRoadTransportation50(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_ROADTRANSPORTATION50,code);
 			if (ret) {
 				return OK;
 			} else
@@ -10370,7 +10358,7 @@ public class RuleFunction {
 					+ String.valueOf(IDstr[Index[1]])
 					+ String.valueOf(IDstr[Index[2]]);
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getRoadTransportation53(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_ROADTRANSPORTATION53,code);
 			if (ret) {
 				return OK;
 			} else
@@ -10399,7 +10387,7 @@ public class RuleFunction {
 			String code = String.valueOf(IDstr[Index[0]])
 					+ String.valueOf(IDstr[Index[1]]);
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getRoadTransportation63(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_ROADTRANSPORTATION63,code);
 			if (ret) {
 				return OK;
 			} else
@@ -10428,7 +10416,7 @@ public class RuleFunction {
 					+ String.valueOf(IDstr[Index[1]])
 					+ String.valueOf(IDstr[Index[2]]);
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPort(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PORT,code);
 			if (ret) {
 				return OK;
 			} else
@@ -10461,7 +10449,7 @@ public class RuleFunction {
 					+ String.valueOf(IDstr[Index[2]])
 					+ String.valueOf(IDstr[Index[3]]);
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getRoadTransportation60(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_ROADTRANSPORTATION60,code);
 			if (ret) {
 				return OK;
 			} else
@@ -10490,7 +10478,7 @@ public class RuleFunction {
 			String code = String.valueOf(IDstr[Index[0]])
 					+ String.valueOf(IDstr[Index[1]]);
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getRoadTransportation64(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_ROADTRANSPORTATION64,code);
 			if (ret) {
 				return OK;
 			} else
@@ -10519,7 +10507,7 @@ public class RuleFunction {
 			String code = String.valueOf(IDstr[Index[0]])
 					+ String.valueOf(IDstr[Index[1]]);
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getHighwayTransportation4b1(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_HIGHWAYTRANSPORTATION4B1,code);
 			if (ret) {
 				return OK;
 			} else
@@ -10549,7 +10537,7 @@ public class RuleFunction {
 					+ String.valueOf(IDstr[Index[1]])
 					+ String.valueOf(IDstr[Index[2]]);
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getHighwayTransportation4b7(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_HIGHWAYTRANSPORTATION4B7,code);
 			if (ret) {
 				return OK;
 			} else
@@ -10578,7 +10566,7 @@ public class RuleFunction {
 			String code = String.valueOf(IDstr[Index[0]])
 					+ String.valueOf(IDstr[Index[1]]);
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getHighwayTransportation4b9(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_HIGHWAYTRANSPORTATION4B9,code);
 			if (ret) {
 				return OK;
 			} else
@@ -10609,7 +10597,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getHighwayTransportation4c3(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_HIGHWAYTRANSPORTATION4C3,code);
 			if (ret) {
 				return OK;
 			} else
@@ -10633,7 +10621,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPortTariff3(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PORTTARIFF3,code);
 			if (ret) {
 				return OK;
 			} else
@@ -10657,7 +10645,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPortTariff4(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PORTTARIFF4,code);
 			if (ret) {
 				return OK;
 			} else
@@ -10682,7 +10670,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPortTariff9(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PORTTARIFF9,code);
 			if (ret) {
 				return OK;
 			} else
@@ -10706,7 +10694,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPortTariff25(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PORTTARIFF25,code);
 			if (ret) {
 				return OK;
 			} else
@@ -10730,7 +10718,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPortTariff26(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PORTTARIFF26,code);
 			if (ret) {
 				return OK;
 			} else
@@ -10754,7 +10742,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPortTariff10(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PORTTARIFF10,code);
 			if (ret) {
 				return OK;
 			} else
@@ -10784,7 +10772,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getMachinery2(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_MACHINERY2,code);
 			if (ret) {
 				return OK;
 			} else
@@ -10814,7 +10802,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getHighwayMaintenance4(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_HIGHWAYMAINTENANCE4,code);
 			if (ret) {
 				return OK;
 			} else
@@ -10844,7 +10832,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getHighwayMaintenance3(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_HIGHWAYMAINTENANCE3,code);
 			if (ret) {
 				return OK;
 			} else
@@ -10874,7 +10862,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getMachinery3(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_MACHINERY3,code);
 			if (ret) {
 				return OK;
 			} else
@@ -10904,7 +10892,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getMachinery4(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_MACHINERY4,code);
 			if (ret) {
 				return OK;
 			} else
@@ -10934,7 +10922,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getMachinery5(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_MACHINERY5,code);
 			if (ret) {
 				return OK;
 			} else
@@ -10964,7 +10952,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getMachinery6(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_MACHINERY6,code);
 			if (ret) {
 				return OK;
 			} else
@@ -10994,7 +10982,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getMachinery7(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_MACHINERY7,code);
 			if (ret) {
 				return OK;
 			} else
@@ -11024,7 +11012,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getMachinery8(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_MACHINERY8,code);
 			if (ret) {
 				return OK;
 			} else
@@ -11054,7 +11042,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getMachinery9(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_MACHINERY9,code);
 			if (ret) {
 				return OK;
 			} else
@@ -11084,7 +11072,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getMachinery10(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_MACHINERY10,code);
 			if (ret) {
 				return OK;
 			} else
@@ -11108,7 +11096,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getHighwayTransportation4c6(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_HIGHWAYTRANSPORTATION4C6,code);
 			if (ret) {
 				return OK;
 			} else
@@ -11139,7 +11127,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getWaterwayTransportation(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_WATERWAYTRANSPORTATION,code);
 			if (ret) {
 				return OK;
 			} else
@@ -11167,7 +11155,7 @@ public class RuleFunction {
 		try {
 			String code = String.valueOf(IDstr[Index[0]]);
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getHighwayTransportation4b10(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_HIGHWAYTRANSPORTATION4B10,code);
 			if (ret) {
 				return OK;
 			} else
@@ -11197,7 +11185,7 @@ public class RuleFunction {
 					+ String.valueOf(IDstr[Index[1]])
 					+ String.valueOf(IDstr[Index[2]]);
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getHighwayTransportation(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_HIGHWAYTRANSPORTATION,code);
 			if (ret) {
 				return OK;
 			} else
@@ -11254,7 +11242,7 @@ public class RuleFunction {
 		String code = new String(IDstr);
 		try {
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getSecurityAccounterments(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_SECURITYACCOUNTERMENTS,code);
 			if (ret)
 				return OK;
 			else
@@ -11273,7 +11261,7 @@ public class RuleFunction {
 		String code = new String(IDstr);
 		try {
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getSpecialVehicle(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_SPECIALVEHICLE,code);
 			if (ret)
 				return OK;
 			else
@@ -11451,7 +11439,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getOfficialPositonByCode(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_OFFICIALPOSITION,code);
 			if (ret) {
 				return OK;
 			} else
@@ -11483,7 +11471,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(CODEstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getMountainRangeAndPeakName(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_MOUNTAINRANGEANDPEAKNAME,code);
 			if (ret) {
 				return OK;
 			} else
@@ -11514,7 +11502,7 @@ public class RuleFunction {
 			}
 
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getIntellectualProperty(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_INTELLECTUALPROPERTY,code);
 			if (ret) {
 				return OK;
 			} else
@@ -11545,7 +11533,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(CODEstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getClassificationOfCivilAviation(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_CLASSIFICATIONOFCIVILAVIATION,code);
 			if (ret) {
 				return OK;
 			} else
@@ -11576,7 +11564,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(CODEstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getNormalAndShortCycleSpeciality(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_NORMALANDSHORTCYCLESPECIALITY,code);
 			if (ret) {
 				return OK;
 			} else
@@ -11607,7 +11595,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(CODEstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getMaintenanceSystemPTwo(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_MAINTENANCESYSTEMPTWO,code);
 			if (ret) {
 				return OK;
 			} else
@@ -11639,7 +11627,7 @@ public class RuleFunction {
 			}
 
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getCountryRegionCode1(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_COUNTRYREGIONCODE1,code);
 			if (ret) {
 				return OK;
 			} else
@@ -11671,7 +11659,7 @@ public class RuleFunction {
 			}
 
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getElectricPower(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_ELECTRICPOWER,code);
 			if (ret) {
 				return OK;
 			} else
@@ -11703,7 +11691,7 @@ public class RuleFunction {
 			}
 
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPowerGrid(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_POWERGRID,code);
 			if (ret) {
 				return OK;
 			} else
@@ -11734,7 +11722,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(CODEstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getElectricPowerIndustry(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_ELECTRICPOWERINDUSTRY,code);
 			if (ret) {
 				return OK;
 			} else
@@ -11765,7 +11753,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(CODEstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getElectricPowerGeography(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_ELECTRICPOWERGEOGRAPHY,code);
 			if (ret) {
 				return OK;
 			} else
@@ -11796,7 +11784,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(CODEstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getVoltageClass(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_VOLTAGECLASS,code);
 			if (ret) {
 				return OK;
 			} else
@@ -11826,7 +11814,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPowerGoodsP2(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_POWERGOODSP2,code);
 			if (ret) {
 				return OK;
 			} else {
@@ -11898,7 +11886,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getGeographicalInfoCode(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_GEOGRAPHICINFO,code);
 			if (ret) {
 				return OK;
 			} else {
@@ -11929,7 +11917,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getHarmfulFactorCode(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_HARMFULFACTOR,code);
 			if (ret) {
 				return OK;
 			} else
@@ -11959,7 +11947,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getRailwayStationCode(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_RAILWAYSTATIONCODE,code);
 			if (ret) {
 				return OK;
 			} else
@@ -12146,7 +12134,7 @@ public class RuleFunction {
 			for (int i = 0; i < LenIndex; i++) {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
-			boolean ret = recoDao.getTreeDiseaseCode(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_TREEDISEASE,code);
 			if (ret) {
 				return OK;
 			} else {
@@ -12177,7 +12165,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getNavigationShipCode(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_NAVIGATIONSHIP,code);
 			if (ret) {
 				return OK;
 			} else {
@@ -12810,7 +12798,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getTravelCode(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_TRAVLEDOCUMENT,code);
 			if (ret) {
 				return OK;
 			} else {
@@ -12842,7 +12830,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(CODEstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getProvinceAdminCode(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PROVINCEADMINCODE,code);
 			if (ret) {
 				return OK;
 			} else
@@ -12874,7 +12862,7 @@ public class RuleFunction {
 			}
 
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getAdminDivision1(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_ADMINDIVISION1,code);
 			if (ret) {
 				return OK;
 			} else
@@ -14265,7 +14253,7 @@ public class RuleFunction {
 		}
 		try {
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPowerMaterials44(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_POWERMATERIALS44,code);
 			if (ret) {
 				return OK;
 			} else
@@ -14298,7 +14286,7 @@ public class RuleFunction {
 		}
 		try {
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPowerMaterials45(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_POWERMATERIALS45,code);
 			if (ret) {
 				return OK;
 			} else
@@ -14331,7 +14319,7 @@ public class RuleFunction {
 		}
 		try {
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPowerMaterials46(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_POWERMATERIALS46,code);
 			if (ret) {
 				return OK;
 			} else
@@ -14364,7 +14352,7 @@ public class RuleFunction {
 		}
 		try {
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPowerMaterials47(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_POWERMATERIALS47,code);
 			if (ret) {
 				return OK;
 			} else
@@ -14397,7 +14385,7 @@ public class RuleFunction {
 		}
 		try {
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPowerMaterials49(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_POWERMATERIALS49,code);
 			if (ret) {
 				return OK;
 			} else
@@ -14430,7 +14418,7 @@ public class RuleFunction {
 		}
 		try {
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPowerMaterials50(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_POWERMATERIALS50,code);
 			if (ret) {
 				return OK;
 			} else
@@ -14463,7 +14451,7 @@ public class RuleFunction {
 		}
 		try {
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPowerMaterials51(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_POWERMATERIALS51,code);
 			if (ret) {
 				return OK;
 			} else
@@ -14496,7 +14484,7 @@ public class RuleFunction {
 		}
 		try {
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPowerMaterials52(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_POWERMATERIALS52,code);
 			if (ret) {
 				return OK;
 			} else
@@ -14528,7 +14516,7 @@ public class RuleFunction {
 		}
 		try {
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPowerMaterials53(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_POWERMATERIALS53,code);
 			if (ret) {
 				return OK;
 			} else
@@ -14561,7 +14549,7 @@ public class RuleFunction {
 		}
 		try {
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPowerMaterials54(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_POWERMATERIALS54,code);
 			if (ret) {
 				return OK;
 			} else
@@ -14592,7 +14580,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPortTariff509(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PORTTARIFF509,code);
 			if (ret) {
 				return OK;
 			} else
@@ -14656,7 +14644,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPortNuclearelementNation(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PORTNuclearelementNation,code);
 			if (ret) {
 				return OK;
 			} else
@@ -14681,7 +14669,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPortNuclearelements(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PORTNuclearelements,code);
 			if (ret) {
 				return OK;
 			} else
@@ -14706,7 +14694,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getAdminDivisionID(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_ADMINDIVISION,code);
 			if (ret) {
 				return OK;
 			} else if (code.equals("100000")) {
@@ -14773,7 +14761,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPortCarProductCompnent(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PORTCarProductCompnent,code);
 			if (ret) {
 				return OK;
 			} else
@@ -14842,7 +14830,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPortTCLBatteryProduct(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PORTTCLBatteryProduct,code);
 			if (ret) {
 				return OK;
 			} else
@@ -14883,7 +14871,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPortProductCode(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PORTProductCode,code);
 			if (ret) {
 				return OK;
 			} else {
@@ -15306,7 +15294,7 @@ public class RuleFunction {
 		}
 		try {
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getBarCodeForCommodity(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_BARCODEFORCOMMODITY,code);
 			if (ret) {
 				return OK;
 			} else
@@ -15397,7 +15385,7 @@ public class RuleFunction {
 		}
 		try {
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getHighwayDatabase71(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_HIGHWAYDATABASE71,code);
 			if (ret) {
 				return OK;
 			} else
@@ -15491,7 +15479,7 @@ public class RuleFunction {
 		}
 		try {
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getHighwayDatabase47(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_HIGHWAYDATABASE47,code);
 			if (ret) {
 				return OK;
 			} else
@@ -15517,7 +15505,7 @@ public class RuleFunction {
 		}
 		try {
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getHighwayDatabase46(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_HIGHWAYDATABASE46,code);
 			if (ret) {
 				return OK;
 			} else
@@ -15632,7 +15620,7 @@ public class RuleFunction {
 		}
 		try {
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getHighwayDatabase17(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_HIGHWAYDATABASE17,code);
 			if (ret) {
 				return OK;
 			} else
@@ -15777,7 +15765,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(CODEstr[Index[i]]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getGassCompany(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_GASSCOMPANY,code);
 			if (ret) {
 				return OK;
 			} else
@@ -15806,7 +15794,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getHydrologicData(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_HYDROLOGICDATA,code);
 			if (ret) {
 				return OK;
 			} else
@@ -15836,7 +15824,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getMeatandVegetable(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_MEATANDVEGETABLE,code);
 			if (ret) {
 				return OK;
 			} else
@@ -15898,7 +15886,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[i]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPortForestTypes(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PORTForestTypes,code);
 			if (ret) {
 				return OK;
 			}
@@ -16096,7 +16084,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[k]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getAnimalDiseaseByCode(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_ANIMIALDISEASE700,code);
 			if (ret) {
 				return OK;
 			} else
@@ -16157,7 +16145,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[k]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getMedicalInstrumentByCode(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_MEDICALINSTRUMENT,code);
 			if (ret) {
 				return OK;
 			} else
@@ -16190,7 +16178,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[k]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getTCMdiseaseByCode(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_TCMDISEASE,code);
 			if (ret) {
 				return OK;
 			} else
@@ -16223,7 +16211,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[k]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getTCMFeatureByCode(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_TCMFEATURE,code);
 			if (ret) {
 				return OK;
 			} else
@@ -16256,7 +16244,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[k]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getDZClassifyByCode(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_DZCLASSIIFY,code);
 			if (ret) {
 				return OK;
 			} else
@@ -16289,7 +16277,7 @@ public class RuleFunction {
 				code = code.concat(String.valueOf(IDstr[k]));
 			}
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getDZClassify710ByCode(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_DZCLASSIFY710,code);
 			if (ret) {
 				return OK;
 			} else
@@ -16353,7 +16341,7 @@ public class RuleFunction {
 			}
 
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPrefixPhoneNO(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_PHONENUMBER,code);
 			if (ret) {
 				return OK;
 			} else
@@ -16386,7 +16374,7 @@ public class RuleFunction {
 			}
 
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPrefixNormalVehicleNO(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_NORMALVEHICLENO,code);
 			if (ret) {
 				return OK;
 			} else
@@ -16419,7 +16407,7 @@ public class RuleFunction {
 			}
 
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPrefixArmyVehicleNO(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_ARMYVEHICLENO,code);
 			if (ret) {
 				return OK;
 			} else
@@ -16477,7 +16465,7 @@ public class RuleFunction {
 			String code = String.valueOf(IDstr[Index[0]]);
 
 			RecoDao recoDao = new RecoDao();
-			boolean ret = recoDao.getPrefixWJVehicleNO(code);
+			boolean ret = recoDao.publicFunction(RecoUtil.SELECT_WJVEHICLENO,code);
 			if (ret) {
 				return OK;
 			} else
